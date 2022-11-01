@@ -141,9 +141,52 @@ const states = [{
 function App() 
 {
 	// Do not alter/remove main div
+	const [state, setState] = useState(0)
+	const [city, setCity] = useState(0)
+	const [landmark, setLandmark] = useState(0)
+
 	return (
 	<div id="main">
-		
+		<label>States : </label>
+		<select id="state" value={state} onChange={(e) => {setState(e.target.value)}}>
+			{
+				states.map((place, index) => {
+					return (
+						<option key={index} value={index}>{states[index].name}</option>
+					)
+				})
+			}
+		</select> <br/><br/>
+		<label>Cities : </label>
+		<select id="city" value={city} onChange={(e) => {setCity(e.target.value)}}>
+		    {
+				states[state].city.map((place, index) => {
+					return (
+						<option key={index} value={index}>{states[state].city[index].name}</option>
+					)
+				})
+			}
+		</select>  <br/><br/>
+		<label>Towns : </label>
+		<select id="landmark" value={landmark} onChange={(e) => {setLandmark(e.target.value)}}>
+		    {
+				states[state].city[city].landmarks.map((place, index) => {
+					return (
+						<option key={index} value={index}>{states[state].city[city].landmarks[index].name}</option>
+					)
+				})
+			}
+		</select> <br/><br/>
+  
+       <div id="state-name"><strong>{states[state].name}</strong></div>
+	   <div id="state-title">{states[state].name}</div>
+	   <div id="state-description">{states[state].description}</div>
+	   <div id="city-name"><strong>{states[state].city[city].name}</strong></div>
+	   <div id="city-title">{states[state].city[city].name}</div>
+	   <div id="city-description">{states[state].city[city].description}</div>
+	   <div id="landmark-name"><strong>{states[state].city[city].landmarks[landmark].name}</strong></div>
+	   <div id="landmark-title">{states[state].city[city].landmarks[landmark].name}</div>
+	   <div id="landmark-description">{states[state].city[city].landmarks[landmark].description}</div>
 	</div>
 	);
 }
